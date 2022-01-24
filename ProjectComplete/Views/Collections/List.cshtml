@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Collection>
+
+@{
+    ViewData["Title"] = "Список Коллекций";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-2 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 250px; background-color: #383B40">
+                <div class="row g-0">
+                    <div><br/></div>
+                    <div class="col-md-8 offset-2" style="text-align:center">
+                        <img src="@item.ImageUrl" class="rounded-circle" width="100%" alt="@item.Name">
+                    </div>
+                    <div class="col-md-10 offset-1">
+                        <div class="card-body col-12 mx-auto" style="text-align:center">
+                            <a class="btn btn-outline-primary" asp-controller="Collections" asp-action="Details" asp-route-id="@item.Id">
+                                   <p class="card-text" style="font-size:smaller; color: white" >@item.Name</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
