@@ -22,6 +22,11 @@ namespace ProjectComplete.Controllers
         {
             return View();
         }
-
+        //Get Items/Details/1
+        public IActionResult Details(int id)
+        {
+            var data = _service.GetItemById(id);
+            return View(data);
+        }
     }
 }

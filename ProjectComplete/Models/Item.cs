@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProjectComplete.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectComplete.Models
 {
-    public class Item
+    public class Item : IEntityBase
     {
         [Key]
         public int Id { get; set; }

@@ -1,0 +1,32 @@
+﻿@model Item
+
+@{
+    ViewData["Title"] = "Details of the Item";
+}
+<div class="row">
+    <div class="col-2 offset-1 bg-secondary rounded">
+        <img src="@Model.Collection.ImageUrl" class="rounded-circle float-start img-thumbnail" style="max-height: 200px;" />
+    </div>
+    <div class="col-8 bg-secondary">
+        <div class="dropdown float-end">
+            <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+            </a>
+            <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" asp-controller="Items" asp-action="Create">Create new item</a></li>
+                <li><a class="dropdown-item"  asp-action="Edit" asp-route-id="@Model.Id">Edit Collection</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Collection</a></li>
+            </ul>
+        </div>
+        <h2 class="text-center">@Model.Name</h2>
+        <hr />
+        <h4 class="font-monospace text-start text-break">
+            Description:@Model.Description
+            <br />
+            Theme: @Model.Collection.Theme
+            <br />
+            Collection: <a asp-action="Details" asp-controller="Collections" asp-route-id="@Model.CollectionId">@Model.Collection.Name</a>
+        </h4>
+    </div>
+</div>

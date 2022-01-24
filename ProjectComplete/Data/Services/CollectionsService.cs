@@ -1,4 +1,5 @@
-﻿using ProjectComplete.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectComplete.Models;
 
 namespace ProjectComplete.Data.Services
 {
@@ -31,7 +32,7 @@ namespace ProjectComplete.Data.Services
 
         public Collection GetById(int id)
         {
-            var result = _context.Collections.FirstOrDefault(x => x.Id == id);
+            var result = _context.Collections.FirstOrDefault(x =>x.Id == id);
             return result;
         }
 

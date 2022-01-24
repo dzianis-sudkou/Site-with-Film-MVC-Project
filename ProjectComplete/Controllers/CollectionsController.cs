@@ -8,9 +8,11 @@ namespace ProjectComplete.Controllers
     public class CollectionsController : Controller
     {
         private readonly ICollectionsService _service;
-        public CollectionsController(ICollectionsService service)
+        private readonly IItemsService _itemsService;
+        public CollectionsController(ICollectionsService service, IItemsService itemsService)
         {
             _service = service;
+            _itemsService = itemsService;
         }
         public IActionResult Index()
         {
@@ -40,10 +42,11 @@ namespace ProjectComplete.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Collectios/Details/1
+        //Get: Collections/Details/1
         public IActionResult Details (int id)
         {
-            var actorDetails = _service.GetById(id);
+            ViewBag.Collection = _service.GetById(id);
+            var actorDetails = _itemsService.GetAllById(id);
             if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
         }

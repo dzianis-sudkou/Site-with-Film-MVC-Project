@@ -1,4 +1,7 @@
-﻿namespace ProjectComplete.Data.Base
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
+namespace ProjectComplete.Data.Base
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
@@ -29,6 +32,13 @@
             _context.Update(entity);
             _context.SaveChanges();
             return (entity);
+        }
+
+        public IEnumerable<T> GetAll(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+            return query.ToList();
         }
     }
 }

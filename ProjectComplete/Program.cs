@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<ICollectionsService,CollectionsService>();
+builder.Services.AddScoped<IItemsService, ItemsService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
