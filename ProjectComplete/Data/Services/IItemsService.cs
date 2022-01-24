@@ -2,16 +2,16 @@
 
 namespace ProjectComplete.Data.Services
 {
-    public interface ICollectionsService 
+    public interface IItemsService
     {
-        //Получаем все коллекции из базы данных
-        IEnumerable<Collection> GetAll();
+        //Получаем все item из базы данных
+        IEnumerable<Item> GetAll();
 
-        //Получение одной отдельной коллекции
-        Collection GetById(int id);
+        //Получение одного отдельного item по id
+        Item GetById(int id);
 
         //Добавление данных в базу данных
-        void Add(Collection collection);
+        void Add(Item newItem);
 
         //Обновление элемента в базе данных
         Collection Update(int id, Collection newCollection);

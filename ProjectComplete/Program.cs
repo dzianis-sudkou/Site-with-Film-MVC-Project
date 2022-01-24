@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectComplete.Data;
+using ProjectComplete.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 
 builder.Services.AddDbContext<AppDbContext>();
+
+builder.Services.AddScoped<ICollectionsService,CollectionsService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

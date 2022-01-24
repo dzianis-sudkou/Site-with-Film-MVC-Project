@@ -1,0 +1,38 @@
+﻿@model Collection
+@{
+    ViewData["Title"] = "Editing";
+}
+<div class="row text">
+    <div class="col-md-8 col-sm-8 offset-md-2 offset-sm-2">
+        <h2>Are you sure? You want to delete @Model.Name</h2>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-sm-8 offset-sm-2 offset-md-2">
+                <div class="form-group">
+                    <label asp-for="ImageUrl" class="control-label"></label>
+                    <input asp-for="ImageUrl" id="ImageUrl" class="form-control" readonly />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="submit" value="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger float-end" />
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="List">Show All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

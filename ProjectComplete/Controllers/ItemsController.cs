@@ -1,19 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectComplete.Data;
+using ProjectComplete.Data.Services;
+using ProjectComplete.Models;
 
 namespace ProjectComplete.Controllers
 {
     public class ItemsController : Controller
     {
-        private readonly AppDbContext _context;
-        public ItemsController(AppDbContext context)
+        private readonly IItemsService _service;
+        public ItemsController(IItemsService service)
         {
-            _context = context;
+            _service = service;
         }
         public IActionResult Index()
         {
-            var data = _context.Items.ToList();
+            var data = _service.GetAll();
             return View(data);
         }
+
+        public IActionResult Create(int id)
+        {
+            return View();
+        }
+
     }
 }

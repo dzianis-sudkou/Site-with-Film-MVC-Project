@@ -1,0 +1,38 @@
+﻿@model Collection
+@{
+    ViewData["Title"] = "Editing";
+}
+<div class="row text">
+    <div class="col-md-8 col-sm-8 offset-md-2 offset-sm-2">
+        <h2>Edit for @Model.Name</h2>
+        <br />
+        <div class="row">
+            <div class="col-md-8 col-sm-8 offset-sm-2 offset-md-2">
+                <form asp-action="Edit">
+                    <div class="form-group">
+                        <label asp-for="ImageUrl" class="control-label"></label>
+                        <input asp-for="ImageUrl" id="ImageUrl" class="form-control" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Edit" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-success float-end" />
+                        <a class="btn btn-outline-secondary" asp-action="List">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
