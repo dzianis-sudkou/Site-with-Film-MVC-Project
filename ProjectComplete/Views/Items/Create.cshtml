@@ -1,31 +1,22 @@
-﻿@using ProjectComplete.Data.Enums
-@model Collection
+﻿@using ProjectComplete.Data
+@using ProjectComplete.Data.ViewModels
+@model NewItemsVM
 
 @{
-    ViewData["Title"] = "Create a new Collection";
+    ViewData["Title"] = "Create a new Item";
 }
 <div class="row text">
     <div class="col-md-8 col-sm-8 offset-md-2 offset-sm-2">
-        <h2>Create new Collection</h2>
+        <h2>Create new Item</h2>
         <br />
         <div class="row">
             <div class="col-md-8 col-sm-8 offset-sm-2 offset-md-2">
                 <form asp-action="Create" class="row g-2">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="ImageUrl" class="control-label"></label>
-                        <input asp-for="ImageUrl" id="ImageUrl" class="form-control" />
-                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Theme" class="control-label"> </label>
-                        <select asp-for="Theme" class="form-control" asp-items="Html.GetEnumSelectList<Theme>()" required> </select>
-                        <span asp-validation-for="Theme" class="ext-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
@@ -33,6 +24,7 @@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" asp-for="CollectionId" />
                         <input type="submit" value="Create" class="btn btn-outline-success float-end" />
                         <a class="btn btn-outline-secondary" asp-action="List">Show All</a>
                     </div>

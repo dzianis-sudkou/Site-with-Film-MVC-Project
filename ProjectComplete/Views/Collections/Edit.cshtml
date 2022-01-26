@@ -1,4 +1,5 @@
-﻿@model Collection
+﻿@using ProjectComplete.Data.Enums
+@model Collection
 @{
     ViewData["Title"] = "Editing";
 }
@@ -14,19 +15,21 @@
                         <input asp-for="ImageUrl" id="ImageUrl" class="form-control" />
                         <span asp-validation-for="ImageUrl" class="text-danger"></span>
                     </div>
-                    <br />
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    <br />
+                    <div class="form-group">
+                        <label asp-for="Theme" class="control-label"> </label>
+                        <select asp-for="Theme" class="form-control" asp-items="Html.GetEnumSelectList<Theme>()" required> </select>
+                        <span asp-validation-for="Theme" class="ext-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                    <br />
                     <div class="form-group">
                         <input type="submit" value="Edit" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-success float-end" />
                         <a class="btn btn-outline-secondary" asp-action="List">Show All</a>

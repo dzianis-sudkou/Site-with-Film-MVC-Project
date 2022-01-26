@@ -13,7 +13,7 @@
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
             <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-controller="Items" asp-action="Create">Create new item</a></li>
+                <li><a class="dropdown-item" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
                 <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@ViewBag.Collection.Id">Delete Collection</a></li>
