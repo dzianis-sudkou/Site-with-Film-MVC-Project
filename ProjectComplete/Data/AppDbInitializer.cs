@@ -93,7 +93,7 @@ namespace ProjectComplete.Data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                string adminUserEmail = "admin@etickets.com";
+                string adminUserEmail = "admin@itr.com";
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
                 {
@@ -105,7 +105,7 @@ namespace ProjectComplete.Data
                         EmailConfirmed = true
 
                     };
-                    await userManager.CreateAsync(newadminUser, "Coding@1234?");
+                    await userManager.CreateAsync(newadminUser, "@Pr6");
                     await userManager.AddToRoleAsync(newadminUser, UserRoles.Admin);
                 }
                 string appUserEmail = "user@itr.com";
