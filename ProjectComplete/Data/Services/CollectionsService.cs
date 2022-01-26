@@ -1,18 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ProjectComplete.Data.ViewModels;
 using ProjectComplete.Models;
+using System.Security.Claims;
 
 namespace ProjectComplete.Data.Services
 {
-    public class CollectionsService : ICollectionsService 
+    public class CollectionsService : ICollectionsService
     {
         private readonly AppDbContext _context;
-        public CollectionsService(AppDbContext appDbContext)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public CollectionsService(AppDbContext appDbContext, UserManager<ApplicationUser> userManager)
         {
             _context = appDbContext;
+            _userManager = userManager;
         }
-        public void Add(Collection collection)
+        public void Add(NewCollectionVM data)
         {
-            _context.Collections.Add(collection);
+            var сollection = new Collection()
+            {
+                ImageUrl = data.ImageUrl,
+                Name = data.Name,
+                Theme = data.Theme,
+                Description = data.Description,
+                UserId = data.UserId
+            };
+            _context.Collections.Add(сollection);
             _context.SaveChanges();
         }
 
@@ -30,9 +43,19 @@ namespace ProjectComplete.Data.Services
 
         }
 
+        public IEnumerable<Collection> GetAllById(string id)
+        {
+            var collections = _context.Collections
+                .Where(c => c.UserId == id)
+                .Include(c => c.ApplicationUser)
+                .ToList();
+            return collections;
+           
+        }
+
         public Collection GetById(int id)
         {
-            var result = _context.Collections.FirstOrDefault(x =>x.Id == id);
+            var result = _context.Collections.FirstOrDefault(x => x.Id == id);
             return result;
         }
 

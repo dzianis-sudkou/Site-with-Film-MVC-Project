@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectComplete.Data;
 using ProjectComplete.Data.Services;
+using ProjectComplete.Data.ViewModels;
 using ProjectComplete.Models;
 
 namespace ProjectComplete.Controllers
@@ -32,12 +33,9 @@ namespace ProjectComplete.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Collection collection)
+        public IActionResult Create(NewCollectionVM collection, string Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(collection);
-            }
+            collection.UserId = Id;
             _service.Add(collection);
             return RedirectToAction(nameof(Index));
         }
@@ -46,9 +44,9 @@ namespace ProjectComplete.Controllers
         public IActionResult Details (int id)
         {
             ViewBag.Collection = _service.GetById(id);
-            var actorDetails = _itemsService.GetAllById(id);
-            if (actorDetails == null) return View("NotFound");
-            return View(actorDetails);
+            var Details = _itemsService.GetAllById(id);
+            if (Details == null) return View("NotFound");
+            return View(Details);
         }
 
         //Get: Collections/Edit/1

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectComplete.Data;
 
@@ -11,9 +12,10 @@ using ProjectComplete.Data;
 namespace ProjectComplete.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220126154623_md")]
+    partial class md
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,9 +234,6 @@ namespace ProjectComplete.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CollectionId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -256,8 +255,6 @@ namespace ProjectComplete.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CollectionId");
 
                     b.ToTable("Collections");
                 });
@@ -381,15 +378,6 @@ namespace ProjectComplete.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjectComplete.Models.Collection", b =>
-                {
-                    b.HasOne("ProjectComplete.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("CollectionId");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ProjectComplete.Models.Comment", b =>

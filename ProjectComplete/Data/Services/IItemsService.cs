@@ -1,5 +1,4 @@
-﻿using ProjectComplete.Data.Base;
-using ProjectComplete.Data.ViewModels;
+﻿using ProjectComplete.Data.ViewModels;
 using ProjectComplete.Models;
 
 namespace ProjectComplete.Data.Services
@@ -9,8 +8,7 @@ namespace ProjectComplete.Data.Services
         IEnumerable<Item> GetAll();
         Item GetItemById(int id);
         IEnumerable<Item> GetAllById(int id);
-        void Add(NewItemsVM item);
-
+        Task AddAsync(NewItemsVM item);
         IEnumerable<Item> Filter(string searchString);
     }
 }

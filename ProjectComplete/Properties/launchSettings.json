@@ -11,6 +11,7 @@
     "ProjectComplete": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchUrl": "Collections",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7021;http://localhost:5021",
       "environmentVariables": {

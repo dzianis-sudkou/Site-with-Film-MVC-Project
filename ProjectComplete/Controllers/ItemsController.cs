@@ -35,7 +35,7 @@ namespace ProjectComplete.Controllers
         [HttpPost]
         public IActionResult Create(NewItemsVM item)
         {
-            _itemsService.Add(item);
+            _itemsService.AddAsync(item);
             return RedirectToAction(nameof(Index));
         }
         //Get Items/Details/1

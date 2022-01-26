@@ -1,5 +1,8 @@
-﻿@using ProjectComplete.Data.Enums
-@model Collection
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager;
+@using ProjectComplete.Data.Enums
+@using ProjectComplete.Data.ViewModels
+@model NewCollectionVM
 
 @{
     ViewData["Title"] = "Create a new Collection";
@@ -33,7 +36,8 @@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-outline-success float-end" />
+                        <input type="hidden" asp-for="UserId" />
+                        <input type="submit" value="Create" class="btn btn-outline-success float-end" asp-route-id="@UserManager.GetUserId(User)"/>
                         <a class="btn btn-outline-secondary" asp-action="List">Show All</a>
                     </div>
                 </form>

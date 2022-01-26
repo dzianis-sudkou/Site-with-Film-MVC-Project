@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectComplete.Data.Base;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProjectComplete.Data.ViewModels;
+using ProjectComplete.Migrations;
 using ProjectComplete.Models;
 using System.Linq.Expressions;
 
@@ -9,9 +10,11 @@ namespace ProjectComplete.Data.Services
     public class ItemsService : IItemsService
     {
         private readonly AppDbContext _context;
-        public ItemsService(AppDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ItemsService(AppDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
 
@@ -32,7 +35,7 @@ namespace ProjectComplete.Data.Services
             return items;
         }
 
-        public void Add(NewItemsVM data)
+        public async Task AddAsync(NewItemsVM data)
         {
             var newItem = new Item()
             {
@@ -40,7 +43,7 @@ namespace ProjectComplete.Data.Services
                 Description = data.Description,
                 CollectionId = data.Id
             };
-            _context.Items.Add(newItem);
+            await _context.Items.AddAsync(newItem);
             _context.SaveChanges();
         }
 

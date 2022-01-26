@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectComplete.Data;
+using ProjectComplete.Data.Services;
 using ProjectComplete.Data.Static;
 using ProjectComplete.Data.ViewModels;
 using ProjectComplete.Models;
+using System.Security.Claims;
 
 namespace ProjectComplete.Controllers
 {
@@ -12,18 +15,22 @@ namespace ProjectComplete.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _context;
+        private readonly ICollectionsService _collService;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context, ICollectionsService collService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _collService = collService;
         }
 
 
         public IActionResult Index()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var data = _collService.GetAllById(userId);
+            return View(data);
         }
         public IActionResult Login()
         {
@@ -77,7 +84,7 @@ namespace ProjectComplete.Controllers
             {
                 FullName = registerVM.FullName,
                 Email = registerVM.Email,
-                UserName = registerVM.Email
+                UserName = registerVM.FullName
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
             if (newUserResponse.Succeeded)
@@ -86,6 +93,11 @@ namespace ProjectComplete.Controllers
             }
             return RedirectToAction("Login");
 
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -30,7 +30,7 @@
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <input type="submit" value="Edit" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-success float-end" />
                         <a class="btn btn-outline-secondary" asp-action="List">Show All</a>
                     </div>

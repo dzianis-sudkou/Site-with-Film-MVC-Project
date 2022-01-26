@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager;
+@model IEnumerable<Collection>
+
+@{
+    ViewData["Title"] = "Profile";
+}
+<div class="row">
+    <div class="col-12 bg-secondary">
+        <div class="dropdown float-end">
+            <a class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+            </a>
+            <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" asp-controller="Collections" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Create new Collection</a></li>
+                <li><hr class="dropdown-divider"></li>
+            </ul>
+        </div>
+        <br/>
+        <h2 class="text-center font-monospace">@UserManager.GetUserName(User)
+        </h2>
+        <hr />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Theme</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@item.Name</td>
+                        <td class="align-middle text-break">@item.Description</td>
+                        <td class="align-content-center">@item.Theme</td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary" asp-controller="Collections" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
+                            <a class="btn btn-outline-info" asp-controller="Collections" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
+                            <a class="btn btn-danger text-white" asp-controller="Collections" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

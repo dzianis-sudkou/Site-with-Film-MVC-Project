@@ -8,5 +8,7 @@ namespace ProjectComplete.Models
         //Adding new custom property
         [Display(Name ="Fulll Name")]
         public string FullName { get; set; }
+
+        List<Collection> Collections { get; set; }
     }
 }
