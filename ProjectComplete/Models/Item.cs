@@ -11,10 +11,11 @@ namespace ProjectComplete.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string UserId { get; set; }
         public int CollectionId { get; set; }
         [ForeignKey("CollectionId")]
         public Collection Collection { get; set; }
-        //public List<Like> Likes { get; set; }
-        //public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

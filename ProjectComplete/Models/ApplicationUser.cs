@@ -8,6 +8,5 @@ namespace ProjectComplete.Models
         //Adding new custom property
         [Display(Name ="Fulll Name")]
         public string FullName { get; set; }
-        public bool Block { get; set; }
     }
 }

@@ -22,10 +22,7 @@ namespace ProjectComplete.Models
         [Required]
         public string ImageUrl { get; set; }
         List<Item> Items { get; set; }
-        //public int UserId { get; set; }
-
-        //[ForeignKey("UserId")]
-        //public User User { get; set; }
+        public string UserId { get; set; }
 
     }
 }
