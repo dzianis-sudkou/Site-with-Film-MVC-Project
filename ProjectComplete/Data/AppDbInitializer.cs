@@ -21,6 +21,7 @@ namespace ProjectComplete.Data
                     {
                         new Collection()
                         {
+                            UserId = "FHRJR-FJHR",
                             Name = "Первая Коллекция",
                             Description = "Это описание первой коллекции",
                             Theme = Theme.Book,
@@ -28,6 +29,7 @@ namespace ProjectComplete.Data
                         },
                         new Collection()
                         {
+                            UserId = "FHRJR-FJHR",
                             Name = "Вторая коллекция",
                             Description = "Это описание второй коллекции",
                             Theme = Theme.Film,
@@ -35,6 +37,7 @@ namespace ProjectComplete.Data
                         },
                         new Collection()
                         {
+                            UserId = "FHRJR-FJHR",
                             Name = "Третья коллекция",
                             Description = "Это описание третьей коллекции",
                             Theme = Theme.Alcohol,
@@ -52,15 +55,16 @@ namespace ProjectComplete.Data
                     {
                         new Item()
                         {
+
                             Name = "Первый Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 1,
+                            CollectionId = 4
                         },
                         new Item()
                         {
                             Name = "Second Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 1,
+                            CollectionId = 4
                         },
                         new Item()
                         {
@@ -68,7 +72,7 @@ namespace ProjectComplete.Data
                             Description = "Я отношусь к третьей коллекции",
                             CollectionId = 3,
                         },
-                    });
+                    }); ;
                     context.SaveChanges();
                 }
             }
