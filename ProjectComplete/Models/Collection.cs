@@ -12,6 +12,7 @@ namespace ProjectComplete.Models
         [Display(Name ="Name Of Collection")]
         [Required(ErrorMessage ="Name is required")]
         public string Name { get; set; }
+
         [Display(Name="Description Of Collection")]
         [Required(ErrorMessage = "Description is required")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Description must be from 3 to 100 letters.")]

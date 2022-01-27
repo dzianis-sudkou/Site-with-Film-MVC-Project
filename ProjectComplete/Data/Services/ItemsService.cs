@@ -63,5 +63,12 @@ namespace ProjectComplete.Data.Services
             }
             return items.ToList();
         }
+
+        public Item Update(int id, Item item)
+        {
+            _context.Update(item);
+            _context.SaveChanges();
+            return (item);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ProjectComplete.Data.Services
         IEnumerable<Item> GetAllById(int id);
         Task AddAsync(NewItemsVM item);
         IEnumerable<Item> Filter(string searchString);
+        Item Update(int id, Item item);
     }
 }

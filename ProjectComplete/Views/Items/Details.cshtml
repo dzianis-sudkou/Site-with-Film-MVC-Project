@@ -13,10 +13,9 @@
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
             <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-controller="Items" asp-action="Create">Create new item</a></li>
-                <li><a class="dropdown-item"  asp-action="Edit" asp-route-id="@Model.Id">Edit Collection</a></li>
+                <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.Id">Edit Item</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Collection</a></li>
+                <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Item</a></li>
             </ul>
         </div>
         <h2 class="text-center">@Model.Name</h2>
@@ -26,7 +25,19 @@
             <br />
             Theme: @Model.Collection.Theme
             <br />
-            Collection: <a asp-action="Details" asp-controller="Collections" asp-route-id="@Model.CollectionId">@Model.Collection.Name</a>
+            Collection: <a asp-action="Details" class="btn btn-secondary" asp-controller="Collections" asp-route-id="@Model.CollectionId">@Model.Collection.Name</a>
         </h4>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text">Добавить комментарий:</span>
+            <input type="text" class="form-control">
+            <input class=" btn btn-outline-success" type="submit" value="Send"/>
+        </div>
     </div>
 </div>

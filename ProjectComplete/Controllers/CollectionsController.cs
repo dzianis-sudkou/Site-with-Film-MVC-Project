@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using ProjectComplete.Data;
 using ProjectComplete.Data.Services;
 using ProjectComplete.Data.ViewModels;
@@ -10,10 +11,12 @@ namespace ProjectComplete.Controllers
     {
         private readonly ICollectionsService _service;
         private readonly IItemsService _itemsService;
-        public CollectionsController(ICollectionsService service, IItemsService itemsService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public CollectionsController(ICollectionsService service, IItemsService itemsService, UserManager<ApplicationUser> userManager)
         {
             _service = service;
             _itemsService = itemsService;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -33,9 +36,9 @@ namespace ProjectComplete.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(NewCollectionVM collection, string Id)
+        public IActionResult Create(NewCollectionVM collection)
         {
-            collection.UserId = Id;
+            collection.UserId = _userManager.GetUserId(User);
             _service.Add(collection);
             return RedirectToAction(nameof(Index));
         }
@@ -59,13 +62,10 @@ namespace ProjectComplete.Controllers
             return View(collectionDetails);
         }
         [HttpPost]
-        public IActionResult Edit(int id, Collection collection)
+        public IActionResult Edit(Collection collection)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(collection);
-            }
-            _service.Update(id, collection);
+            collection.UserId = _userManager.GetUserId(User);
+            _service.Update(collection);
             return RedirectToAction(nameof(Index));
         }
 

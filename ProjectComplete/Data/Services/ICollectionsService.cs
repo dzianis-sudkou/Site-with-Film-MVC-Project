@@ -16,7 +16,7 @@ namespace ProjectComplete.Data.Services
         void Add(NewCollectionVM data);
 
         //Обновление элемента в базе данных
-        Collection Update(int id, Collection newCollection);
+        Collection Update(Collection newCollection);
 
         //Удаление из базы данных
         void Delete(int id);

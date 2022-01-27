@@ -59,7 +59,7 @@ namespace ProjectComplete.Data.Services
             return result;
         }
 
-        public Collection Update(int id, Collection newCollection)
+        public Collection Update(Collection newCollection)
         {
             _context.Update(newCollection);
             _context.SaveChanges();

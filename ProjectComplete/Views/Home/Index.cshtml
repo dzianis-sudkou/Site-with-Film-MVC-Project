@@ -1,4 +1,29 @@
-﻿@{
+﻿@model IEnumerable<Item>
+@{
     ViewData["Title"] = "Home Page";
 }
+<h2 class="text-center">
+    <b class="font-monospace">
+        Добро пожаловать на сайт!
+    </b>
+</h2>
+<hr /> <br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-2 border-primary mb-3">
+            <div class="card" style="width:15rem; height:150px; background-color: #383B40">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: white">@item.Name</h5>
+                    <p class="card-text text-break" style="color: white">@item.Description</p>
+                    <div style="position:absolute; top: 6.3rem; right:6rem">
+                        <a class="btn btn-primary" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">
+                            <p class="card-text" style="font-size:smaller; color: white">Details</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 

@@ -44,5 +44,23 @@ namespace ProjectComplete.Controllers
             var data = _itemsService.GetItemById(id);
             return View(data);
         }
+
+        //Get Items/Edit/1
+        public IActionResult Edit(int id)
+        {
+            var data = _itemsService.GetItemById(id);
+            return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Item item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+            _itemsService.Update(id, item);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

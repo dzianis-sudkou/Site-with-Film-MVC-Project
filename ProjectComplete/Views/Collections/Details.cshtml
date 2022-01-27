@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Item>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> UserManager;
+@model IEnumerable<Item>
 
 @{
     ViewData["Title"] = "Details of the Collection";
@@ -8,17 +11,20 @@
         <img src="@ViewBag.Collection.ImageUrl" class="rounded-circle float-start img-thumbnail" style="max-height: 200px;" />
     </div>
     <div class="col-8 bg-secondary">
-        <div class="dropdown float-end">
+        @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
+        {
+            <div class="dropdown float-end">
             <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
             <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
                 <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li><hr class="dropdown-divider"></li> 
                 <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@ViewBag.Collection.Id">Delete Collection</a></li>
             </ul>
         </div>
+        }
         <h2 class="text-center">@ViewBag.Collection.Name</h2>
         <hr />
         <h4 class="font-monospace text-start text-break">
@@ -45,10 +51,14 @@
                     <tr>
                         <td class="align-middle">@item.Name</td>
                         <td class="align-middle text-break">@item.Description</td>
+                        
                         <td class="align-middle">
-                            <a class="btn btn-outline-primary" asp-controller="Items" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
-                            <a class="btn btn-outline-info" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
-                            <a class="btn btn-danger text-white" asp-controller="Items" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
+                            <a class="btn btn-outline-info" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a>
+                            @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
+                            {
+                                <a class="btn btn-outline-primary" asp-controller="Items" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> 
+                                <a class="btn btn-danger text-white" asp-controller="Items" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
+                            }
                         </td>
                     </tr>
                 }
