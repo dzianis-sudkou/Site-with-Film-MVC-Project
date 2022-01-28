@@ -55,17 +55,14 @@ namespace ProjectComplete.Controllers
         public IActionResult Edit(int id)
         {
             var data = _itemsService.GetItemById(id);
+            if (data == null) return View("NotFound");
             return View(data);
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, Item item)
+        public IActionResult Edit(Item item)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(item);
-            }
-            _itemsService.Update(id, item);
+            _itemsService.Update(item);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> CommentAsync(int id, string comment)

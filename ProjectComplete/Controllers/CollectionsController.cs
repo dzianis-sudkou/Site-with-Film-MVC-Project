@@ -64,7 +64,6 @@ namespace ProjectComplete.Controllers
         [HttpPost]
         public IActionResult Edit(Collection collection)
         {
-            collection.UserId = _userManager.GetUserId(User);
             _service.Update(collection);
             return RedirectToAction(nameof(Index));
         }

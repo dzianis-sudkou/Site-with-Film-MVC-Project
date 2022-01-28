@@ -20,10 +20,11 @@ namespace ProjectComplete.Data.Services
 
         public Item GetItemById(int id)
         {
-            var itemDetails = _context.Items
-                .Include(c => c.Collection)
-                .FirstOrDefault(n => n.Id == id);
-            return itemDetails;
+            var result = _context.Items
+                .Where(c => c.Id == id)
+                .Include(x => x.Collection)    
+                .FirstOrDefault(x => x.Id == id);
+            return result;
         }
         
         public IEnumerable<Item> GetAllById(int id)
@@ -64,11 +65,11 @@ namespace ProjectComplete.Data.Services
             return items.ToList();
         }
 
-        public Item Update(int id, Item item)
+        public Item Update(Item item)
         {
             _context.Update(item);
             _context.SaveChanges();
-            return (item);
+            return item;
         }
 
         public void Delete(int id)
