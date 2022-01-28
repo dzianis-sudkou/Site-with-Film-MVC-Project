@@ -47,6 +47,7 @@ namespace ProjectComplete.Controllers
         public IActionResult Details(int id)
         {
             var data = _itemsService.GetItemById(id);
+            ViewBag.Comments = _commentService.GetAll(id);
             return View(data);
         }
 
@@ -67,11 +68,11 @@ namespace ProjectComplete.Controllers
             _itemsService.Update(id, item);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Comment(int id, string comment)
+        public async Task<IActionResult> CommentAsync(int id, string comment)
         {
-            string userid = _userManager.GetUserId(User);
-            _commentService.AddAsync(userid, id, comment);
-            return View(nameof(Details));
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
+            await _commentService.AddAsync(user, id, comment);
+            return Redirect($"../Items/Details/{id}");
         }
     }
 }

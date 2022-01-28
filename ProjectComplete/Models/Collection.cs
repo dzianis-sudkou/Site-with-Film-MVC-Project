@@ -25,7 +25,7 @@ namespace ProjectComplete.Models
         public string ImageUrl { get; set; }
         List<Item> Items { get; set; }
         public string UserId { get; set; }
-        [ForeignKey("CollectionId")]
+        [ForeignKey("UserId")]
         public ApplicationUser ApplicationUser { get; set; }
     }
 }

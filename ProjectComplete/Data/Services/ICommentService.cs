@@ -4,6 +4,7 @@ namespace ProjectComplete.Data.Services
 {
     public interface ICommentService
     {
-        Task AddAsync(string userid, int id, string data);
+        Task AddAsync(ApplicationUser user, int id, string data);
+        IEnumerable<Comment> GetAll(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProjectComplete.Models;
 
 namespace ProjectComplete.Data.Services
@@ -12,10 +13,8 @@ namespace ProjectComplete.Data.Services
             _context = appDbContext;
             _userManager = userManager;
         }
-        public async Task AddAsync(string userid, int id, string data)
+        public async Task AddAsync(ApplicationUser user, int id, string data)
         {
-            
-            var user = await _userManager.FindByIdAsync(userid);
             var comment = new Comment()
             {
                 UserName = user.FullName,
@@ -24,6 +23,15 @@ namespace ProjectComplete.Data.Services
             };
             _context.Comments.Add(comment);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Comment> GetAll(int id)
+        {
+            var comments = _context.Comments
+                .Where(c => c.ItemId == id)
+                .Include(c => c.Item)
+                .ToList();
+            return comments;
         }
     }
 }

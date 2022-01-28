@@ -1,5 +1,6 @@
-﻿@model Item
-
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager;
+@model Item
 @{
     ViewData["Title"] = "Details of the Item";
 }
@@ -33,15 +34,28 @@
 <br />
 <br />
 <div class="row">
-    <div class="col-10 offset-1 bg-secondary rounded-3">
 
-        <div class="input-group input-group-sm mb-3">
-            <form asp-action="Comment">
-                <span class="input-group-text">Добавить комментарий:</span>
-                <input type="hidden" asp-for="Id" />
-                <input type="text" name="comment" class="form-control">
-                <button class=" btn btn-success" type="submit" value="Send"></button>
-            </form>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-10 offset-1 bg-secondary rounded-3">
+            <div class="input-group input-group-sm mb-0">
+                <form class="container-fluid d-flex" asp-action="Comment">
+                    <span class="input-group-text">Добавить комментарий:</span>
+                    <input type="hidden" asp-for="Id">
+                    <input type="text" name="comment" class="form-control" required>
+                    <button class=" btn btn-success" type="submit">Send</button>
+                </form>
+            </div>
         </div>
+    }
+    <div class="col-10 offset-1 bg-secondary rounded-3">
+        <h2>Комментарии:</h2>
     </div>
+    @foreach (var item in ViewBag.Comments)
+    {
+        <div class="col-10 offset-1 bg-secondary rounded-2">
+            <p><b>@item.UserName</b></p>
+            <p>@item.value</p>
+        </div>
+    }
 </div>
