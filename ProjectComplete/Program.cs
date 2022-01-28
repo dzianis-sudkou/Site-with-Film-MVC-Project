@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<ICollectionsService,CollectionsService>();
 builder.Services.AddScoped<IItemsService, ItemsService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 

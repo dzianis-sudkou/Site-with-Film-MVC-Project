@@ -232,9 +232,6 @@ namespace ProjectComplete.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CollectionId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -257,9 +254,7 @@ namespace ProjectComplete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CollectionId");
-
-                    b.ToTable("Collections");
+                    b.ToTable("Collections", (string)null);
                 });
 
             modelBuilder.Entity("ProjectComplete.Models.Comment", b =>
@@ -281,7 +276,7 @@ namespace ProjectComplete.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("ProjectComplete.Models.Item", b =>
@@ -307,7 +302,7 @@ namespace ProjectComplete.Migrations
 
                     b.HasIndex("CollectionId");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("ProjectComplete.Models.Like", b =>
@@ -329,7 +324,7 @@ namespace ProjectComplete.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,15 +376,6 @@ namespace ProjectComplete.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjectComplete.Models.Collection", b =>
-                {
-                    b.HasOne("ProjectComplete.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("CollectionId");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ProjectComplete.Models.Comment", b =>

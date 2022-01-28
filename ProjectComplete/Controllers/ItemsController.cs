@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using ProjectComplete.Data;
 using ProjectComplete.Data.Services;
 using ProjectComplete.Data.ViewModels;
@@ -10,10 +11,14 @@ namespace ProjectComplete.Controllers
     {
         private readonly IItemsService _itemsService;
         private readonly ICollectionsService _collectionsService;
-        public ItemsController(IItemsService itemsService, ICollectionsService collectionsService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICommentService _commentService;
+        public ItemsController(IItemsService itemsService, ICollectionsService collectionsService, UserManager<ApplicationUser> userManager, ICommentService commentService )
         {
             _itemsService = itemsService;
             _collectionsService = collectionsService;
+            _userManager = userManager;
+            _commentService = commentService;
         }
         public IActionResult Index()
         {
@@ -61,6 +66,12 @@ namespace ProjectComplete.Controllers
             }
             _itemsService.Update(id, item);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Comment(int id, string comment)
+        {
+            string userid = _userManager.GetUserId(User);
+            _commentService.AddAsync(userid, id, comment);
+            return View(nameof(Details));
         }
     }
 }
