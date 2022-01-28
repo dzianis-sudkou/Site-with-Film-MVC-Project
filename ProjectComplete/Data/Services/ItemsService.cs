@@ -70,5 +70,12 @@ namespace ProjectComplete.Data.Services
             _context.SaveChanges();
             return (item);
         }
+
+        public void Delete(int id)
+        {
+            var result = _context.Items.FirstOrDefault(x => x.Id == id);
+            _context.Items.Remove(result);
+            _context.SaveChanges();
+        }
     }
 }

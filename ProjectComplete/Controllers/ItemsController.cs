@@ -74,5 +74,21 @@ namespace ProjectComplete.Controllers
             await _commentService.AddAsync(user, id, comment);
             return Redirect($"../Items/Details/{id}");
         }
+        public IActionResult Delete(int id)
+        {
+            var item = _itemsService.GetItemById(id);
+            if (item == null) return View("NotFound");
+            return View(item);
+        }
+
+        [HttpPost, ActionName("Delete")]
+
+        public IActionResult DeleteConfirmation(int id)
+        {
+            var item = _itemsService.GetItemById(id);
+            if (item == null) return View("NotFound");
+            _itemsService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

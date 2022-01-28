@@ -9,16 +9,19 @@
         <img src="@Model.Collection.ImageUrl" class="rounded-circle float-start img-thumbnail" style="max-height: 200px;" />
     </div>
     <div class="col-8 bg-secondary">
-        <div class="dropdown float-end">
-            <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-            </a>
-            <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.Id">Edit Item</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Item</a></li>
-            </ul>
-        </div>
+        @if (User.Identity.IsAuthenticated &  (Model.Collection.UserId == UserManager.GetUserId(User) | User.IsInRole("Admin")))
+        {
+            <div class="dropdown float-end">
+                <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.Id">Edit Item</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Item</a></li>
+                </ul>
+            </div>
+        }
         <h2 class="text-center">@Model.Name</h2>
         <hr />
         <h4 class="font-monospace text-start text-break">
@@ -30,11 +33,7 @@
         </h4>
     </div>
 </div>
-<br />
-<br />
-<br />
-<div class="row">
-
+<div class="row" style="margin-top:20px;" >
     @if (User.Identity.IsAuthenticated)
     {
         <div class="col-10 offset-1 bg-secondary rounded-3">
@@ -48,12 +47,12 @@
             </div>
         </div>
     }
-    <div class="col-10 offset-1 bg-secondary rounded-3">
+    <div class="col-10 offset-1 bg-secondary rounded-3" style="margin-top:20px;">
         <h2>Комментарии:</h2>
     </div>
     @foreach (var item in ViewBag.Comments)
     {
-        <div class="col-10 offset-1 bg-secondary rounded-2">
+        <div class="col-10 offset-1 bg-secondary rounded-2" style="margin-top:5px">
             <p><b>@item.UserName</b></p>
             <p>@item.value</p>
         </div>

@@ -11,5 +11,6 @@ namespace ProjectComplete.Data.Services
         Task AddAsync(NewItemsVM item);
         IEnumerable<Item> Filter(string searchString);
         Item Update(int id, Item item);
+        void Delete(int id);
     }
 }
