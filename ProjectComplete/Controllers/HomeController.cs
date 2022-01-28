@@ -7,12 +7,10 @@ namespace ProjectComplete.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IItemsService _itemsservice;
 
-        public HomeController(ILogger<HomeController> logger, IItemsService itemsservice)
+        public HomeController(IItemsService itemsservice)
         {
-            _logger = logger;
             _itemsservice = itemsservice;
         }
 
@@ -22,10 +20,8 @@ namespace ProjectComplete.Controllers
             return View(data);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -91,6 +91,11 @@ namespace ProjectComplete.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
             }
+            else
+            {
+                TempData["Error"] = "Пароль должен содержать, как минимум 1 цифру, буквы(Верхний и нижний регистр), и символ.";
+                return View(registerVM);
+            }
             return RedirectToAction("Login");
 
         }

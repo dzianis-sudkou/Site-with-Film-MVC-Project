@@ -55,16 +55,15 @@ namespace ProjectComplete.Data
                     {
                         new Item()
                         {
-
                             Name = "Первый Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 4
+                            CollectionId = 2
                         },
                         new Item()
                         {
                             Name = "Second Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 4
+                            CollectionId = 2
                         },
                         new Item()
                         {
@@ -109,7 +108,7 @@ namespace ProjectComplete.Data
                         EmailConfirmed = true
 
                     };
-                    await userManager.CreateAsync(newadminUser, "@Pr6");
+                    await userManager.CreateAsync(newadminUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newadminUser, UserRoles.Admin);
                 }
                 string appUserEmail = "user@itr.com";

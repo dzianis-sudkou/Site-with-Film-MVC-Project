@@ -18,6 +18,7 @@ namespace ProjectComplete.Data.ViewModels
 
         [Display(Name = "Confirm your password:")]
         [Required(ErrorMessage = "Необходим повторный ввод пароля")]
+       
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string CofirmPassword { get; set; }
