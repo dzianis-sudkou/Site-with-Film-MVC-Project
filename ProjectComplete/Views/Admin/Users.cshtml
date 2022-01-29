@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ApplicationUser>
+﻿@using ProjectComplete.Models
+@model IEnumerable<ApplicationUser>
 @{
     ViewData["Title"] = "Admin Panel";
 }
@@ -25,7 +26,7 @@
                         </td>
                         <td class="align-middle">
                             <a class="btn btn-outline-primary" asp-action="newAdmin" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Admin </a> |
-                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
+                            <a class="btn btn-outline-info" asp-action="Details" asp-controller="Account" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
                             <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
                         </td>
                     </tr>

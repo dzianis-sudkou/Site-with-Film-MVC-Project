@@ -19,15 +19,18 @@ namespace ProjectComplete.Data.Services
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            var user  = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+            _context.SaveChanges();
         }
 
         public async Task newAdminAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+            _context.SaveChanges();
         }
 
         public List<ApplicationUser> ToList()

@@ -24,5 +24,11 @@ namespace ProjectComplete.Controllers
             await _adminService.newAdminAsync(id);
             return RedirectToAction(nameof(Users));
         }
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _adminService.Delete(id);
+            return RedirectToAction(nameof(Users));
+        }
+
     }
 }

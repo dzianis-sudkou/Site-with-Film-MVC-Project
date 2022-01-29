@@ -12,12 +12,12 @@
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
             <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-controller="Collections" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Create new Collection</a></li>
+                <li><a class="dropdown-item" asp-controller="Collections" asp-action="Create" asp-route-id="ViewBag.User.Id">Create new Collection</a></li>
                 <li><hr class="dropdown-divider"></li>
             </ul>
         </div>
         <br/>
-        <h2 class="text-center font-monospace">@UserManager.GetUserName(User)
+        <h2 class="text-center font-monospace">@ViewBag.User.FullName
         </h2>
         <hr />
     </div>

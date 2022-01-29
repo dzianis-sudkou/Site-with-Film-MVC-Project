@@ -14,16 +14,16 @@
         @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
         {
             <div class="dropdown float-end">
-            <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-            </a>
-            <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
-                <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
-                <li><hr class="dropdown-divider"></li> 
-                <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@ViewBag.Collection.Id">Delete Collection</a></li>
-            </ul>
-        </div>
+                <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
+                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@ViewBag.Collection.Id">Delete Collection</a></li>
+                </ul>
+            </div>
         }
         <h2 class="text-center">@ViewBag.Collection.Name</h2>
         <hr />
@@ -34,29 +34,37 @@
         </h4>
     </div>
 </div>
-<br />
-<div class="row">
-    <div class="col-md-10 offset-1">
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-8 offset-2">
+        <div class="btn-group float-end">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Дата:
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" id="sort-btn-desc">По возрастанию</button></li>
+                <li><button class="dropdown-item" id="sort-btn-asc">По убыванию</button></li>
+            </ul>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    <th class="float-end">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="sort">
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr data-id="@item.Id">
                         <td class="align-middle">@item.Name</td>
                         <td class="align-middle text-break">@item.Description</td>
-                        
-                        <td class="align-middle">
+
+                        <td class="align-middle float-end">
                             <a class="btn btn-outline-info" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a>
                             @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
                             {
-                                <a class="btn btn-outline-primary" asp-controller="Items" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> 
+                                <a class="btn btn-outline-primary" asp-controller="Items" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a>
                                 <a class="btn btn-danger text-white" asp-controller="Items" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
                             }
                         </td>
@@ -66,3 +74,44 @@
         </table>
     </div>
 </div>
+<script type="text/javascript">
+    //Сортировка элементов по убыванию
+    document.querySelector('#sort-btn-desc').onclick = MySortDesc;
+    document.querySelector('#sort-btn-asc').onclick = MySort;
+    function MySortDesc()
+    {
+        let list = document.querySelector('#sort')
+        for (let i = 0; i<list.children.length; i++)
+        {
+            for(let j=i; j<list.children.length; j++)
+            {
+                if(+list.children[i].getAttribute('data-id') < +list.children[j].getAttribute('data-id'))
+                {
+                    replacedNode = list.replaceChild(list.children[j], list.children[i]);
+                    insertAfter(replacedNode, list.children[i]);
+                }
+            }
+        }
+    }
+    function MySort()
+    {
+        let list = document.querySelector('#sort')
+        for (let i = 0; i<list.children.length; i++)
+        {
+            for(let j=i; j<list.children.length; j++)
+            {
+                if(+list.children[i].getAttribute('data-id') > +list.children[j].getAttribute('data-id'))
+                {
+                    replacedNode = list.replaceChild(list.children[j], list.children[i]);
+                    insertAfter(replacedNode, list.children[i]);
+                }
+            }
+        }
+    }
+    function insertAfter(elem, refElem)
+    {
+        return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
+    }
+
+
+</script>

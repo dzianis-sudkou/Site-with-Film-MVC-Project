@@ -26,11 +26,19 @@ namespace ProjectComplete.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.User = await _userManager.FindByIdAsync(userId);
             var data = _collService.GetAllById(userId);
             return View(data);
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            ViewBag.User = await _userManager.FindByIdAsync(id);
+            var data = _collService.GetAllById(id);
+            return View("Index", data);
         }
         public IActionResult Login()
         {
