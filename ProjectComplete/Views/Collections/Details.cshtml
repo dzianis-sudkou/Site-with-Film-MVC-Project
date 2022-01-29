@@ -7,10 +7,10 @@
     ViewData["Title"] = "Details of the Collection";
 }
 <div class="row">
-    <div class="col-2 offset-1 bg-secondary rounded">
+    <div class="col-2 offset-1 rounded" style="background-color: #cdcdcd;" >
         <img src="@ViewBag.Collection.ImageUrl" class="rounded-circle float-start img-thumbnail" style="max-height: 200px;" />
     </div>
-    <div class="col-8 bg-secondary">
+    <div class="col-8" style="background-color: #cdcdcd;">
         @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
         {
             <div class="dropdown float-end">

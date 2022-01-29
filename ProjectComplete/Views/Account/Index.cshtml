@@ -6,14 +6,13 @@
     ViewData["Title"] = "Profile";
 }
 <div class="row">
-    <div class="col-12 bg-secondary">
-        <div class="dropdown float-end">
-            <a class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="col-12" style="background-color: #cdcdcd">
+        <div class="dropdown float-end" >
+            <a class="btn text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
-            <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" asp-controller="Collections" asp-action="Create" asp-route-id="ViewBag.User.Id">Create new Collection</a></li>
-                <li><hr class="dropdown-divider"></li>
+            <ul class="dropdown-menu text-small" style="background-color: #9a9a9a;">
+                <li><a class="dropdown-item" style="background-color: #9a9a9a" asp-controller="Collections" asp-action="Create" asp-route-id="ViewBag.User.Id">Create new Collection</a></li>
             </ul>
         </div>
         <br/>
@@ -41,7 +40,7 @@
                         <td class="align-middle">@item.Name</td>
                         <td class="align-middle text-break">@item.Description</td>
                         <td class="align-content-center">@item.Theme</td>
-                        <td class="align-middle">
+                        <td>
                             <a class="btn btn-outline-primary" asp-controller="Collections" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
                             <a class="btn btn-outline-info" asp-controller="Collections" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
                             <a class="btn btn-danger text-white" asp-controller="Collections" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>

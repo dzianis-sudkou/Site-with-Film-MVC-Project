@@ -5,10 +5,10 @@
     ViewData["Title"] = "Details of the Item";
 }
 <div class="row">
-    <div class="col-2 offset-1 bg-secondary rounded">
+    <div class="col-2 offset-1 rounded" style="background-color: #cdcdcd;">
         <img src="@Model.Collection.ImageUrl" class="rounded-circle float-start img-thumbnail" style="max-height: 200px;" />
     </div>
-    <div class="col-8 bg-secondary">
+    <div class="col-8" style="background-color: #cdcdcd;">
         @if (User.Identity.IsAuthenticated &  (Model.Collection.UserId == UserManager.GetUserId(User) | User.IsInRole("Admin")))
         {
             <div class="dropdown float-end">
@@ -36,10 +36,10 @@
 <div class="row" style="margin-top:20px;" >
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="col-10 offset-1 bg-secondary rounded-3">
+        <div class="col-10 offset-1 rounded-3">
             <div class="input-group input-group-sm mb-0">
                 <form class="container-fluid d-flex" asp-action="Comment">
-                    <span class="input-group-text">Добавить комментарий:</span>
+                    <span class="input-group-text">Comment:</span>
                     <input type="hidden" asp-for="Id">
                     <input type="text" name="comment" class="form-control" required>
                     <button class=" btn btn-success" type="submit">Send</button>
@@ -47,12 +47,12 @@
             </div>
         </div>
     }
-    <div class="col-10 offset-1 bg-secondary rounded-3" style="margin-top:20px;">
+    <div class="col-10 offset-1 rounded-3" style="background-color: #9a9a9a;  margin-top:20px;">
         <h2>Комментарии:</h2>
     </div>
     @foreach (var item in ViewBag.Comments)
     {
-        <div class="col-10 offset-1 bg-secondary rounded-2" style="margin-top:5px">
+        <div class="col-10 offset-1 rounded-2" style="margin-top:5px; background-color: #cdcdcd;">
             <p><b>@item.UserName</b></p>
             <p>@item.value</p>
         </div>
