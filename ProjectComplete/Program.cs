@@ -16,12 +16,19 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 builder.Services.AddDbContext<AppDbContext>();
 
-builder.Services.AddScoped<ICollectionsService,CollectionsService>();
+builder.Services.AddScoped<ICollectionsService, CollectionsService>();
 builder.Services.AddScoped<IItemsService, ItemsService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 4;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+
+}).AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();

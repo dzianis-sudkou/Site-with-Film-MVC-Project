@@ -14,12 +14,12 @@
         @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
         {
             <div class="dropdown float-end">
-                <a class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class=" btn text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
-                <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
-                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
+                <ul class="dropdown-menu text-small" style="background-color: #9a9a9a;">
+                    <li><a class="dropdown-item" style="background-color: #9a9a9a" asp-controller="Items" asp-action="Create" asp-route-id="@ViewBag.Collection.Id">Create new item</a></li>
+                    <li><a class="dropdown-item" style="background-color: #9a9a9a" asp-action="Edit" asp-route-id="@ViewBag.Collection.Id">Edit Collection</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@ViewBag.Collection.Id">Delete Collection</a></li>
                 </ul>
@@ -36,7 +36,7 @@
 </div>
 <div class="row" style="margin-top:30px">
     <div class="col-lg-8 offset-2">
-        <div class="btn-group float-end">
+        <div class="btn-group" style="float: right;">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Дата:
             </button>
@@ -48,19 +48,19 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th class="float-end">Actions</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="sort">
                 @foreach (var item in Model)
                 {
                     <tr data-id="@item.Id">
-                        <td class="align-middle">@item.Name</td>
-                        <td class="align-middle text-break">@item.Description</td>
+                        <td align="center">@item.Name</td>
+                        <td align="center" class="text-break">@item.Description</td>
 
-                        <td class="align-middle float-end">
+                        <td align="center">
                             <a class="btn btn-outline-info" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a>
                             @if (@ViewBag.Collection.UserId == UserManager.GetUserId(User))
                             {
@@ -112,6 +112,4 @@
     {
         return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
     }
-
-
 </script>

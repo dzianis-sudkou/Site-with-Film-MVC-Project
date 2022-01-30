@@ -8,23 +8,23 @@
     <div class="col-md-12">
         <table class="table">
             <thead>
-                <tr class="text-center">
-                    <th class="align-middle">UserName</th>
-                    <th class="align-middle">Email</th>
-                    <th class="align-middle">Actions</th>
+                <tr>
+                    <th class="text-center">UserName</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="align-middle">
+                        <td align="center">
                             <p>@item.UserName</p>
                         </td>
-                        <td class="align-middle">
+                        <td align="center">
                             <p>@item.Email</p>
                         </td>
-                        <td class="align-middle">
+                        <td align="center">
                             <a class="btn btn-outline-primary" asp-action="newAdmin" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Admin </a> |
                             <a class="btn btn-outline-info" asp-action="Details" asp-controller="Account" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
                             <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>

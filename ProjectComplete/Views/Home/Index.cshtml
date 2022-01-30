@@ -7,22 +7,23 @@
         Добро пожаловать на сайт!
     </b>
 </h2>
-<hr /> <br />
+<hr />
+<br />
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-lg-2 col-sm-4 border-primary mb-3">
-            <div class="card" style="width:250px; height:150px; background-color: #cdcdcd;">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text text-break" >@item.Description</p>
-                    <div style="position:absolute; top: 6.3rem; right:6rem">
-                        <a class="btn btn-primary" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">
-                            <p class="card-text" style="font-size:smaller; color: white">Details</p>
-                        </a>
+                <div class="card" style="width:225px; height:150px; background-color: #cdcdcd;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text text-break">@item.Description</p>
+                        <div style="position:absolute; top: 6.3rem; right:6rem">
+                            <a class="btn btn-primary" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">
+                                <p class="card-text" style="font-size:smaller; color: white">Details</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     }
 </div>

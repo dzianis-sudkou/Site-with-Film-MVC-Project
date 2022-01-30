@@ -31,16 +31,17 @@ namespace ProjectComplete.Controllers
 
         //Get: Collections/Create
 
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
+            ViewBag.Id = id; 
             return View();
         }
         [HttpPost]
-        public IActionResult Create(NewCollectionVM collection)
+        public IActionResult Create(string id, NewCollectionVM collection)
         {
-            collection.UserId = _userManager.GetUserId(User);
+            collection.UserId = id;
             _service.Add(collection);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Account");
         }
 
         //Get: Collections/Details/1
@@ -84,7 +85,7 @@ namespace ProjectComplete.Controllers
             var collectionDetails = _service.GetById(id);
             if (collectionDetails == null) return View("NotFound");
             _service.Delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Account");
         }
     }
 }

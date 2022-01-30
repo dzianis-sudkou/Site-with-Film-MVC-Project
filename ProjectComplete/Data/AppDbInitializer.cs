@@ -21,15 +21,15 @@ namespace ProjectComplete.Data
                     {
                         new Collection()
                         {
-                            UserId = "FHRJR-FJHR",
-                            Name = "Первая Коллекция",
+                            UserId = "b6532680-f6d0-4e81-b82a-4f2fee5760ec",
+                            Name = "Первая",
                             Description = "Это описание первой коллекции",
                             Theme = Theme.Book,
                             ImageUrl = "https://cdn.pixabay.com/photo/2017/07/02/09/03/books-2463779_960_720.jpg"
                         },
                         new Collection()
                         {
-                            UserId = "FHRJR-FJHR",
+                            UserId = "b6532680-f6d0-4e81-b82a-4f2fee5760ec",
                             Name = "Вторая коллекция",
                             Description = "Это описание второй коллекции",
                             Theme = Theme.Film,
@@ -37,7 +37,7 @@ namespace ProjectComplete.Data
                         },
                         new Collection()
                         {
-                            UserId = "FHRJR-FJHR",
+                            UserId = "b6532680-f6d0-4e81-b82a-4f2fee5760ec",
                             Name = "Третья коллекция",
                             Description = "Это описание третьей коллекции",
                             Theme = Theme.Alcohol,
@@ -48,6 +48,7 @@ namespace ProjectComplete.Data
                 }
 
 
+                var coll = context.Collections.FirstOrDefault();
                 //Add Items
                 if (!context.Items.Any())
                 {
@@ -57,19 +58,22 @@ namespace ProjectComplete.Data
                         {
                             Name = "Первый Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 2
+                            CollectionId = coll.Id,
+                            Like = 55
                         },
                         new Item()
                         {
                             Name = "Second Item",
                             Description = "Я отношусь к первой коллекции",
-                            CollectionId = 2
+                            CollectionId = coll.Id,
+                            Like = 43
                         },
                         new Item()
                         {
                             Name = "Third Item",
                             Description = "Я отношусь к третьей коллекции",
-                            CollectionId = 3,
+                            CollectionId = coll.Id,
+                            Like = 35
                         },
                     }); ;
                     context.SaveChanges();
