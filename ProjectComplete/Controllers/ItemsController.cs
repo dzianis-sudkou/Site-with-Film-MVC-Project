@@ -35,13 +35,14 @@ namespace ProjectComplete.Controllers
         [HttpGet]
         public IActionResult Create(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
         [HttpPost]
         public IActionResult Create(NewItemsVM item)
         {
             _itemsService.AddAsync(item);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Collections", item.Id);
         }
         //Get Items/Details/1
         public IActionResult Details(int id)

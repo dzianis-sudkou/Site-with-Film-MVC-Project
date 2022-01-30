@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using ProjectComplete.Data;
 using ProjectComplete.Data.Services;
 using ProjectComplete.Models;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +40,17 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddControllersWithViews();
 
-
+//builder.Services.Configure<RequestLocalizationOptions>(options =>
+//{
+//    var culture = new[]
+//    {
+//        new CultureInfo("en"),
+//        new CultureInfo("ru")
+//    };
+//    options.DefaultRequestCulture = new RequestCulture("en");
+//    options.SupportedCultures = culture;
+//    options.SupportedUICultures = culture;
+//});
 
 var app = builder.Build();
 
