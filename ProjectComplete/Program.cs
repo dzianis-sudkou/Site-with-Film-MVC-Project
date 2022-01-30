@@ -38,19 +38,22 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddControllersWithViews()
+            .AddDataAnnotationsLocalization()
+            .AddViewLocalization();
 
-//builder.Services.Configure<RequestLocalizationOptions>(options =>
-//{
-//    var culture = new[]
-//    {
-//        new CultureInfo("en"),
-//        new CultureInfo("ru")
-//    };
-//    options.DefaultRequestCulture = new RequestCulture("en");
-//    options.SupportedCultures = culture;
-//    options.SupportedUICultures = culture;
-//});
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var culture = new[]
+    {
+        new CultureInfo("en"),
+        new CultureInfo("ru")
+    };
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = culture;
+    options.SupportedUICultures = culture;
+});
 
 var app = builder.Build();
 
@@ -60,6 +63,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseRequestLocalization();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

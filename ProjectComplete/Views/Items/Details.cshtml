@@ -16,20 +16,20 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
                 <ul class="dropdown-menu text-small bg-secondary" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.Id">Edit Item</a></li>
+                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">Delete Item</a></li>
+                    <li><a class="dropdown-item bg-danger rounded" asp-action="Delete" asp-route-id="@Model.Id">@Localizer["Delete"]</a></li>
                 </ul>
             </div>
         }
         <h2 class="text-center">@Model.Name</h2>
         <hr />
         <h4 class="font-monospace text-start text-break">
-            Description:@Model.Description
+            @Localizer["Desc"]:@Model.Description
             <br />
-            Theme: @Model.Collection.Theme
+            @Localizer["Theme"]: @Model.Collection.Theme
             <br />
-            Collection: <a asp-action="Details" class="btn btn-secondary" asp-controller="Collections" asp-route-id="@Model.CollectionId">@Model.Collection.Name</a>
+            @Localizer["Collection"]: <a asp-action="Details" class="btn btn-secondary" asp-controller="Collections" asp-route-id="@Model.CollectionId">@Model.Collection.Name</a>
         </h4>
     </div>
 </div>
@@ -39,16 +39,16 @@
         <div class="col-10 offset-1 rounded-3">
             <div class="input-group input-group-sm mb-0">
                 <form class="container-fluid d-flex" asp-action="Comment">
-                    <span class="input-group-text">Comment:</span>
+                    <span class="input-group-text">@Localizer["Comment"]:</span>
                     <input type="hidden" asp-for="Id">
                     <input type="text" name="comment" class="form-control" required>
-                    <button class=" btn btn-success" type="submit">Send</button>
+                    <button class=" btn btn-success" type="submit">@Localizer["Send"]</button>
                 </form>
             </div>
         </div>
     }
     <div class="col-10 offset-1 rounded-3" style="background-color: #9a9a9a;  margin-top:20px;">
-        <h2>Комментарии:</h2>
+        <h2>@Localizer["Comments"]:</h2>
     </div>
     @foreach (var item in ViewBag.Comments)
     {

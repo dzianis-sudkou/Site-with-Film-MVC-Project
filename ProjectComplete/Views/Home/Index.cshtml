@@ -4,7 +4,7 @@
 }
 <h2 class="text-center">
     <b class="font-monospace">
-        Добро пожаловать на сайт!
+        @Localizer["Welcome"]
     </b>
 </h2>
 <hr />
@@ -18,9 +18,11 @@
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text text-break">@item.Description</p>
                     <div style="position:absolute; top: 6.3rem; right:6rem">
-                        <a class="btn btn-primary" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">
-                            <p class="card-text" style="font-size:smaller; color: white">Details</p>
-                        </a>
+                        <center>
+                            <a class="btn btn-primary" asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">
+                                <p class="card-text" style="font-size:smaller; color: white">@Localizer["Details"]</p>
+                            </a>
+                        </center>
                     </div>
                 </div>
             </div>

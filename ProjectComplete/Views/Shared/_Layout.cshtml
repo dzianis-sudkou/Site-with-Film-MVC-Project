@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-toogleable-md border-bottom mb-3 navbar-dark bg-dark">
-            <div  class="container-fluid">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">Project</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false">
                     <span><i class="bi bi-card-list"></i></span>
@@ -24,7 +24,7 @@
                         <input name="searchString" class="form-control me-2" type="search" placeholder="Search">
                         <button class="btn btn-outline-success me-2" type="submit"><i class="bi bi-search"></i></button>
                     </form>
-                    <partial name="_Identity.cshtml"/>
+                    <partial name="_Identity.cshtml" />
                 </div>
             </div>
         </nav>
@@ -36,8 +36,9 @@
     </div>
     <footer class="footer text-muted">
         <div class="container-fluid">
-            &copy; 2022 - Project
+            &copy; 2022 - Project   @await Html.PartialAsync("_Language")
         </div>
+          
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
